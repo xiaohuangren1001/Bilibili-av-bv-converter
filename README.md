@@ -16,3 +16,10 @@ print(bv2av('BV17x411w7KC')) # av170001
 from avbv import bv2av
 print(bv2av('DV17x411w7KC')) # av170001
 ```
+如看不懂代码可以去看下面两个视频：
+
+[av转bv动画展示](https://www.bilibili.com/video/BV1N741127Tj)
+
+[bv转av动画展示](https://www.bilibili.com/video/BV1R7411y7kw)
+
+~~实际上我的就是通过这两个视频改的~~
