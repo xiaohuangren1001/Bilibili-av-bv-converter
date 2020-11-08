@@ -2,7 +2,7 @@
 本转换器开源，可以自行把代码拿去研究
 
 ---
-首先将avbv.py下载到python路径中的site-packages文件夹下~~（我不会pypi，所以没有弄到pypi）~~
+首先将avbv.py下载到python路径中的site-packages文件夹下 ~~（我不会pypi，所以没有弄到pypi）~~
 
 使用方法：导入avbv模块，就可以用av2bv和bv2av来进行互转了
 
