@@ -1,4 +1,6 @@
 ### Bilibili-av-bv-converter
+用户手册（中文版）
+
 本转换器开源，可以自行把代码拿去研究
 
 ---
@@ -26,4 +28,37 @@ print(bv2av('DV17x411w7KC')) # av170001
 [bv转av动画展示](https://www.bilibili.com/video/BV1R7411y7kw)
 
 ~~实际上我的就是通过这两个视频改的~~
+
+---
+### Bilibili-av-bv-converter
+User Manual (English version)
+
+This converter is open-source, you can download the source and do some observation.
+
+First, download the `avbv.py`, put it into python's `site-packages` folder. ~~(I don't know how to upload files to pypi)~
+
+Then import it, you can use av2bv and bv2av to exchange!
+
+Sample:
+```python
+from avbv import av2bv, bv2av
+av2bv('av170001') # BV17x411w7KC
+bv2av('BV17x411w7KC') # av170001
+```
+
+When you try to execute things such as `bv2av("BV1")`, it will generate an `IndexError` and exit.
+
+But if you use that it will be working:
+```python
+from avbv import bv2av
+bv2av('DV17x411w7KC') # av170001
+```
+
+If you can't understand the code, you can see these videos:
+
+[av to bv](https://www.bilibili.com/video/BV1N741127Tj)
+
+[bv to av](https://www.bilibili.com/video/BV1R7411y7kw)
+
+~~Of course, mine is modify by them~~
 
