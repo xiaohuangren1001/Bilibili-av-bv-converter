@@ -37,7 +37,7 @@ This converter is open-source, you can download the source and do some observati
 
 First, download the `avbv.py`, put it into python's `site-packages` folder. ~~I don't know how to upload files to pypi~~
 
-Then import it, you can use av2bv and bv2av to exchange!
+Then import it, you can use av2bv and bv2av to do convertions!
 
 Sample:
 ```python
