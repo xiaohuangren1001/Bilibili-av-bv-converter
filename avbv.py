@@ -1,12 +1,22 @@
-table = ['f', 'Z', 'o', 'd', 'R', '9', 'X', 'Q', 'D', 'S', 'U', 'm', '2', '1', 'y', 'C', 'k', 'r', '6', 'z', 'B', 'q', 'i', 'v', 'e', 'Y', 'a', 'h', '8', 'b', 't', '4', 'x', 's', 'W', 'p', 'H', 'n', 'J', 'E', '7', 'j', 'L', '5', 'V', 'G', '3', 'g', 'u', 'M', 'T', 'K', 'N', 'P', 'A', 'w', 'c', 'F']
-table2 = {'1': 13, '2': 12, '3': 46, '4': 31, '5': 43, '6': 18, '7': 40, '8': 28, '9': 5, 'A': 54, 'B': 20, 'C': 15, 'D': 8, 'E': 39, 'F': 57, 'G': 45, 'H': 36, 'J': 38, 'K': 51, 'L': 42, 'M': 49, 'N': 52, 'P': 53, 'Q': 7, 'R': 4, 'S': 9, 'T': 50, 'U': 10, 'V': 44, 'W': 34, 'X': 6, 'Y': 25, 'Z': 1, 'a': 26, 'b': 29, 'c': 56, 'd': 3, 'e': 24, 'f': 0, 'g': 47, 'h': 27, 'i': 22, 'j': 41, 'k': 16, 'm': 11, 'n': 37, 'o': 2, 'p': 35, 'q': 21, 'r': 17, 's': 33, 't': 30, 'u': 48, 'v': 23, 'w': 55, 'x': 32, 'y': 14, 'z': 19}
-def av2bv(avid):
+TABLE = ['f', 'Z', 'o', 'd', 'R', '9', 'X', 'Q', 'D', 'S', 'U', 'm', '2', '1', 'y', 'C', 'k', 'r', '6', 'z', 'B', 'q', 'i', 'v', 'e', 'Y', 'a', 'h', '8', 'b', 't', '4', 'x', 's', 'W', 'p', 'H', 'n', 'J', 'E', '7', 'j', 'L', '5', 'V', 'G', '3', 'g', 'u', 'M', 'T', 'K', 'N', 'P', 'A', 'w', 'c', 'F']
+REV_TABLE = { "F": 0, "c": 1, "w": 2, "A": 3, "P": 4, "N": 5, "K": 6, "T": 7, "M": 8, "u": 9, "g": 10, "3": 11, "G": 12, "V": 13, "5": 14, "L": 15, "j": 16, "7": 17, "E": 18, "J": 19, "n": 20, "H": 21, "p": 22, "W": 23, "s": 24, "x": 25, "4": 26, "t": 27, "b": 28, "8": 29, "h": 30, "a": 31, "Y": 32, "e": 33, "v": 34, "i": 35, "q": 36, "B": 37, "z": 38, "6": 39, "r": 40, "k": 41, "C": 42, "y": 43, "1": 44, "2": 45, "m": 46, "U": 47, "S": 48, "D": 49, "Q": 50, "X": 51, "9": 52, "R": 53, "d": 54, "o": 55, "Z": 56, "f": 57, }
+
+MAX_AVID = 1 << 51
+MIN_AVID = 1
+
+def av2bv(avid: str):
+    if not avid.lower().startswith('av'):
+        raise TypeError('invalid avid format')
     avid = avid[2:]
     avid = int(avid)
-    c = 177451812
-    r = avid ^ c
-    c2 = 100618342136696320
-    r = r + c2
+    if avid <= MIN_AVID:
+        raise TypeError('avid too small')
+    if avid >= MAX_AVID:
+        raise TypeError('avid too big')
+    c = 23442827791579
+    c2 = 2251799813685247
+    r = MAX_AVID | avid
+    r ^= c
     y = []
     for i in range(10):
         p = pow(58, i)
@@ -15,7 +25,7 @@ def av2bv(avid):
         y.append(y0)
     ans = []
     for i in y:
-        ans.append(table[i])
+        ans.append(TABLE[i])
     rand = [11, 10, 3, 8, 4, 6, 2, 9, 5, 7]
     pair = list(zip(rand, ans))
     pair.sort()
@@ -25,27 +35,29 @@ def av2bv(avid):
     ans = ''.join(ans)
     return ans
 
-def bv2av(bvid):
-    bvid = bvid[2:]
-    bvid = list(bvid)
-    bvid2 = []
-    for i in bvid:
-        i = table2[i]
-        bvid2.append(i)
-    bvid = [0] * 10
-    bvid[0] = bvid2[0] * pow(58, 6)
-    bvid[1] = bvid2[1] * pow(58, 2)
-    bvid[2] = bvid2[2] * pow(58, 4)
-    bvid[3] = bvid2[3] * pow(58, 8)
-    bvid[4] = bvid2[4] * pow(58, 5)
-    bvid[5] = bvid2[5] * pow(58, 9)
-    bvid[6] = bvid2[6] * pow(58, 3)
-    bvid[7] = bvid2[7] * pow(58, 7)
-    bvid[8] = bvid2[8] * 58
-    bvid[9] = bvid2[9]
-    r = sum(bvid)
-    r = r - 100618342136696320
-    r = r ^ 177451812
-    if r < 0: raise TypeError('Illegal bvid')
-    r = str(r)
-    return 'av' + r
+def bv2av(bvid: str):
+    if not bvid.lower().startswith("bv1"):
+        raise TypeError('Illegal bvid')
+
+    bvid_list: list[str] = list(bvid[3:])
+    swap(bvid_list, 1, 4)
+    swap(bvid_list, 0, 6)
+
+    avid = 0
+    for byte in bvid_list:
+        index = REV_TABLE.get(byte, None)
+        if index is None:
+            raise TypeError('bvid contains illegal character')
+        avid *= 58
+        avid += index
+
+    avid &= 2251799813685247
+    avid ^= 23442827791579
+    if avid < 0: raise TypeError('Illegal bvid')
+    avid = str(avid)
+    return 'av' + avid
+
+def swap(list: list, index1: int, index2: int):
+    temp = list[index2]
+    list[index2] = list[index1]
+    list[index1] = temp
