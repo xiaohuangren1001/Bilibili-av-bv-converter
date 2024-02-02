@@ -54,7 +54,7 @@ from avbv import bv2av
 bv2av('DV17x411w7KC') # av170001
 ```
 
-If you can't understand the code, you can see these videos:
+If you can't understand the code, you can watch these videos:
 
 [av to bv](https://www.bilibili.com/video/BV1N741127Tj)
 
