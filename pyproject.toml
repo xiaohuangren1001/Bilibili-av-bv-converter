@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "abv-py"
+version = "0.1.0"
+description = "bilibili AV/BV converter with avid>2^28 support"
+authors = ["poly000"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
