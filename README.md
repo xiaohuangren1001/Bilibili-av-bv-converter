@@ -16,8 +16,5 @@ print(bv2av('BV17x411w7KC')) # 170001
 ```
 当在bv2av中输入不合法bv号（如bv1）会报错（TypeError）
 
-但是下面的代码不会报错：
-```python
-from abv_py import bv2av
-print(bv2av('BV17x411w7KC')) # 170001
-```
+---
+UPD 2024/2/4：感谢 @poly000 对本项目进行大幅修改，并且更加完善了（
